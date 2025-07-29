@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Minecraft Carts</title>
+    <link rel="stylesheet" href="../css/css.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
+</head>
+
+<body>
+
+    <section class="todo">
+
+       
+        <section class="arriba">
+            <img src="../src/egg.png" alt="" />
+            <h1>MINECRAFT CARTS</h1>
+            <img src="../src/egg.png" alt="" />
+        </section>
+
+        
+        <section class="info">
+
+            
+            <section class="carts">
+                <section class="contadores">
+                    <section class="fila-cofre">
+                        
+                        <h4>ABRIDOR DE SOBRES</h4>
+                        <img src="../src/cofre2.png" alt="">
+                    </section>
+                    <section class="fila">
+                        <h5>Packs Abiertos: <span id="packsCount">0</span></h5>
+                        <h5>ITEMS Totales: <span id="itemsCount">0</span></h5>
+                    </section>
+                    <button id="abrirSobreBtn">APERTURA</button>
+                </section>
+
+                
+                <section class="cartas-abiertas">
+                    <h4>CARTAS OBTENIDAS</h4>
+                    <div class="fila-cartas" id="filaCartas">
+                        <!-- Cartas generadas dinámicamente aquí -->
+                    </div>
+                </section>
+            </section>
+
+            
+            <section class="stats">
+                <section class="fila-3">
+                    
+                    <h3>STATS</h3>
+                    <img src="../src/slime.png" alt="">
+                </section>
+                
+                <ul>
+                    <li><span class="dot common"></span> COMMON: <span id="statCommon">0</span></li>
+                    <li><span class="dot rare"></span> RARE: <span id="statRare">0</span></li>
+                    <li><span class="dot epic"></span> EPIC: <span id="statEpic">0</span></li>
+                    <li><span class="dot legendary"></span> LEGENDARY: <span id="statLegendary">0</span></li>
+                </ul>
+            </section>
+        </section>
+
+       
+        <section class="inventario">
+            <h3>INVENTARIO</h3>
+
+        
+            <div class="filtros">
+                <button class="filtro activo">ALL</button>
+                <button class="filtro">COMMON</button>
+                <button class="filtro">RARE</button>
+                <button class="filtro">EPIC</button>
+                <button class="filtro">LEGENDARY</button>
+            </div>
+
+           
+            <div class="contenedor-inventario" id="contenedorInventario">
+                <!-- Aquí se mostrarán todas las cartas coleccionadas -->
+            </div>
+        </section>
+
+    </section>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
