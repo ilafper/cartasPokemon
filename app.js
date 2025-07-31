@@ -1,4 +1,16 @@
 $(document).ready(function () {
+
+  $('.tab-button').click(function () {
+    const tabID = $(this).data('tab');
+
+    // Activar solo el botón clicado
+    $('.tab-button').removeClass('active');
+    $(this).addClass('active');
+
+    // Mostrar solo el contenido de la pestaña correspondiente
+    $('.tab-content').hide();
+    $('#' + tabID).show();
+  });
   const cartas = [
     // 🟡 Legendaria (1)
     { nombre: "Ender Dragón", descripcion: "La criatura final del End, poderosa y temida.", tipo: "legendaria" },
@@ -39,7 +51,10 @@ $(document).ready(function () {
     legendaria: 0
   }
 
-
+  let cartasComunes = [];
+  let cartasEpicas = [];
+  let cartasLegendarias = [];
+  let cartasRaras = [];
 
   $('#abrirSobreBtn').click(function () {
     //reorganiza el arrat y coge los tres primeros.
@@ -68,7 +83,9 @@ $(document).ready(function () {
         </section>
       `;
         contenedor.append(cartaHTML);
+        if (carta.tipo === "comun") {
 
+        }
         // Actualizar estadísticas
         tipos[carta.tipo] = (tipos[carta.tipo] || 0) + 1;
         itemsTotales++;
@@ -83,11 +100,12 @@ $(document).ready(function () {
       $('#statEpic').text(tipos.epica);
       $('#statLegendary').text(tipos.legendaria);
 
+
     } else {
       contenedor.empty();
       boton.text("APERTURA");
     }
-    
+
 
 
   });

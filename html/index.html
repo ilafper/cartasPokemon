@@ -13,21 +13,21 @@
 
     <section class="todo">
 
-       
+
         <section class="arriba">
             <img src="../src/egg.png" alt="" />
             <h1>MINECRAFT CARTS</h1>
             <img src="../src/egg.png" alt="" />
         </section>
 
-        
+
         <section class="info">
 
-            
+
             <section class="carts">
                 <section class="contadores">
                     <section class="fila-cofre">
-                        
+
                         <h3>ABRIDOR DE COFRES</h3>
                         <img src="../src/cofre2.png" alt="">
                     </section>
@@ -38,23 +38,23 @@
                     <button id="abrirSobreBtn">APERTURA</button>
                 </section>
 
-                
+
                 <section class="cartas-abiertas">
                     <h4>CARTAS OBTENIDAS</h4>
                     <div class="listaCartas" id="listaCartas">
-                        
+
                     </div>
                 </section>
             </section>
 
-            
+
             <section class="stats">
                 <section class="fila-3">
-                    
+
                     <h3>STATS</h3>
                     <img src="../src/slime.png" alt="">
                 </section>
-                
+
                 <ul>
                     <li><span class="dot common"></span> COMMON: <span id="statCommon">0</span></li>
                     <li><span class="dot rare"></span> RARE: <span id="statRare">0</span></li>
@@ -64,11 +64,11 @@
             </section>
         </section>
 
-       
+
         <section class="inventario">
             <h3>INVENTARIO</h3>
 
-        
+
             <div class="filtros">
                 <button class="filtro activo">ALL</button>
                 <button class="filtro">COMMON</button>
@@ -77,10 +77,19 @@
                 <button class="filtro">LEGENDARY</button>
             </div>
 
-           
-            <div class="contenedor-inventario" id="contenedorInventario">
-                <!-- Aquí se mostrarán todas las cartas coleccionadas -->
+
+            <div class="tabs">
+                <button class="tab-button active" data-tab="listaComunes">Comunes</button>
+                <button class="tab-button" data-tab="listaRaras">Raras</button>
+                <button class="tab-button" data-tab="listaEpicas">Epicas</button>
+                <button class="tab-button" data-tab="listaLegendarias">Legendarias</button>
             </div>
+
+            <!-- Contenedores de contenido -->
+            <div class="tab-content" id="listaComunes">comunes</div>
+            <div class="tab-content" id="listaRaras" style="display: none;">raras</div>
+            <div class="tab-content" id="listaEpicas" style="display: none;">epicas</div>
+            <div class="tab-content" id="listaLegendarias" style="display: none;">legendarias</div>
         </section>
 
     </section>
