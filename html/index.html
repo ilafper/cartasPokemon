@@ -67,29 +67,23 @@
 
         <section class="inventario">
             <h3>INVENTARIO</h3>
-
-
-            <div class="filtros">
-                <button class="filtro activo">ALL</button>
-                <button class="filtro">COMMON</button>
-                <button class="filtro">RARE</button>
-                <button class="filtro">EPIC</button>
-                <button class="filtro">LEGENDARY</button>
-            </div>
+            
 
 
             <div class="tabs">
-                <button class="tab-button active" data-tab="listaComunes">Comunes</button>
+                <button class="tab-button active" data-tab="listaTodas">Todas</button>
+                <button class="tab-button" data-tab="listaComunes">Comunes</button>
                 <button class="tab-button" data-tab="listaRaras">Raras</button>
                 <button class="tab-button" data-tab="listaEpicas">Epicas</button>
                 <button class="tab-button" data-tab="listaLegendarias">Legendarias</button>
             </div>
 
             <!-- Contenedores de contenido -->
-            <div class="tab-content" id="listaComunes">comunes</div>
-            <div class="tab-content" id="listaRaras" style="display: none;">raras</div>
-            <div class="tab-content" id="listaEpicas" style="display: none;">epicas</div>
-            <div class="tab-content" id="listaLegendarias" style="display: none;">legendarias</div>
+             <div class="tab-content" id="listaTodas"></div>
+            <div class="tab-content" id="listaComunes" style="display: none;"></div>
+            <div class="tab-content" id="listaRaras" style="display: none;"></div>
+            <div class="tab-content" id="listaEpicas" style="display: none;"></div>
+            <div class="tab-content" id="listaLegendarias" style="display: none;"></div>
         </section>
 
     </section>

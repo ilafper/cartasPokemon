@@ -51,10 +51,25 @@ $(document).ready(function () {
     legendaria: 0
   }
 
-  let cartasComunes = [];
-  let cartasEpicas = [];
-  let cartasLegendarias = [];
-  let cartasRaras = [];
+  function actualizarInventario(contenedor, carta) {
+    let cartaExistente = contenedor.find(`.carta[data-nombre="${carta.nombre}"]`);
+    if (cartaExistente.length > 0) {
+      let contador = cartaExistente.find('.contador');
+      let cantidad = parseInt(contador.text().substring(1));
+      contador.text(`x${cantidad + 1}`);
+    } else {
+      const cartaHTML = `
+        <section class="carta ${carta.tipo}" data-nombre="${carta.nombre}">
+          <img src="../src/slime.png" alt="imagen carta">
+          <h5>${carta.nombre}</h5>
+          <p>${carta.descripcion}</p>
+          <p>${carta.tipo}</p>
+          <span class="contador">x1</span>
+        </section>
+      `;
+      contenedor.append(cartaHTML);
+    }
+  }
 
   $('#abrirSobreBtn').click(function () {
     //reorganiza el arrat y coge los tres primeros.
@@ -65,30 +80,45 @@ $(document).ready(function () {
     const contenedor = $('#listaCartas');
 
     if (boton.text() == "APERTURA") {
-      // Cambiamos texto a "Cerrar"
+
       boton.text("Cerrar");
 
       // Mezclamos cartas y cogemos 4
       const cartasSeleccionadas = cartas.sort(() => 0.5 - Math.random()).slice(0, 4);
 
-      contenedor.empty(); // Limpiamos antes de añadir
+      contenedor.empty(); // Limpiamos antes de añadir.
 
       cartasSeleccionadas.forEach(carta => {
         const cartaHTML = `
-        <section class="carta ${carta.tipo}">
+        <section class="carta ${carta.tipo}" data-nombre="${carta.nombre}">
           <img src="../src/slime.png" alt="imagen carta">
           <h5>${carta.nombre}</h5>
           <p>${carta.descripcion}</p>
-          <p>${carta.tipo.toUpperCase()}</p>
+          <p>${carta.tipo}</p>
+          <span class="contador">x1</span>
         </section>
       `;
         contenedor.append(cartaHTML);
-        if (carta.tipo === "comun") {
 
-        }
+
+
+
+
+
+        // Inventario
+        actualizarInventario($('#listaTodas'), carta);
+        if (carta.tipo === "comun") actualizarInventario($('#listaComunes'), carta);
+        else if (carta.tipo === "rara") actualizarInventario($('#listaRaras'), carta);
+        else if (carta.tipo === "epica") actualizarInventario($('#listaEpicas'), carta);
+        else if (carta.tipo === "legendaria") actualizarInventario($('#listaLegendarias'), carta);
+
+
         // Actualizar estadísticas
         tipos[carta.tipo] = (tipos[carta.tipo] || 0) + 1;
         itemsTotales++;
+
+
+
       });
 
       // Actualizar datos
