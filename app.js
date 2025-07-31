@@ -60,10 +60,12 @@ $(document).ready(function () {
     } else {
       const cartaHTML = `
         <section class="carta ${carta.tipo}" data-nombre="${carta.nombre}">
+          <p class="tipo">${carta.tipo}</p>
+          <span class="corner-bl"></span>
+          <span class="corner-br"></span>
           <img src="../src/slime.png" alt="imagen carta">
           <h5>${carta.nombre}</h5>
           <p>${carta.descripcion}</p>
-          <p>${carta.tipo}</p>
           <span class="contador">x1</span>
         </section>
       `;
@@ -91,10 +93,13 @@ $(document).ready(function () {
       cartasSeleccionadas.forEach(carta => {
         const cartaHTML = `
         <section class="carta ${carta.tipo}" data-nombre="${carta.nombre}">
+          <p class="tipo">${carta.tipo}</p>
+          <span class="corner-bl"></span>
+          <span class="corner-br"></span>
           <img src="../src/slime.png" alt="imagen carta">
           <h5>${carta.nombre}</h5>
           <p>${carta.descripcion}</p>
-          <p>${carta.tipo}</p>
+          
           <span class="contador">x1</span>
         </section>
       `;

@@ -5,7 +5,8 @@
 
 body {
   font-family: 'Minecraft', sans-serif;
-  background-image: url('../src/fondo.png'); /* asegúrate del nombre */
+  background-image: url('../src/fondo.png');
+  /* asegúrate del nombre */
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -40,33 +41,35 @@ body {
   flex-wrap: wrap;
   margin-top: 20px;
 }
-.fila-cofre{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-.fila-cofre img{
-    width: 50px;
+
+.fila-cofre {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
-.fila-3{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 10px;
+.fila-cofre img {
+  width: 50px;
 }
-.fila-3 img{
-    width: 50px;
-    height: 50px;
+
+.fila-3 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+
+.fila-3 img {
+  width: 50px;
+  height: 50px;
 }
 
 .carts {
   flex: 2;
-  background-color: rgba(255, 248, 250, 0.13);
+  background-color: rgb(10, 1, 19);
   padding: 20px;
   border-radius: 10px;
-  border: 2px solid #ffb3d1;
-  backdrop-filter: blur(4px);
+  border: 4px solid #ffb3d1;
 }
 
 .contadores h4 {
@@ -79,21 +82,6 @@ body {
   gap: 40px;
 }
 
-.abrir-btn {
-  background-color: #ff66aa;
-  border: none;
-  padding: 10px 20px;
-  color: white;
-  font-weight: bold;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: transform 0.2s;
-}
-
-.abrir-btn:hover {
-  background-color: #ff88cc;
-  transform: scale(1.05);
-}
 
 .resultado {
   display: flex;
@@ -103,33 +91,173 @@ body {
 }
 
 .carta {
-  background-color: rgba(255, 255, 255, 0.15);
-  border: 2px solid #ffccd6;
-  border-radius: 10px;
-  padding: 15px;
-  width: 150px;
+  position: relative;
+  background-color: #111;
+  /* Fondo oscuro tipo obsidiana */
+  border: 2px solid #8b005d;
+  width: 160px;
+  padding: 10px;
+  padding-bottom: 20px;
   text-align: center;
-  backdrop-filter: blur(3px);
+  font-family: 'Minecraft', sans-serif;
+  color: #fdfdfd;
+  display: flex;
+  flex-direction: column;
+  image-rendering: pixelated;
 }
 
-.carta .rareza {
-  font-size: 0.8em;
+/* Rareza destacada arriba (mismo color para todas) */
+.carta .tipo {
+  color: #f8f8f8;
   font-weight: bold;
-  color: #ffb3e0;
+  font-size: 0.75em;
+  padding: 4px 0;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  letter-spacing: 1px;
 }
 
-.carta .info {
-  font-size: 0.75em;
+/* Esquinas decoradas estilo recuadro */
+.carta::before,
+.carta::after,
+.carta .corner-bl,
+.carta .corner-br {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: #8b005d;
+  /* Rosa fuerte para destacar */
 }
+
+.carta::before {
+  top: 0;
+  left: 0;
+}
+
+.carta::after {
+  top: 0;
+  right: 0;
+}
+
+.carta .corner-bl {
+  bottom: 0;
+  left: 0;
+}
+
+.carta .corner-br {
+  bottom: 0;
+  right: 0;
+}
+
+.carta img {
+  margin-top: 5px;
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  margin: 0 auto;
+}
+
+.carta h5 {
+  font-size: 1em;
+  color: #ffe6fa;
+  margin: 0;
+  text-shadow: 0 0 2px #000;
+}
+
+.carta p {
+  font-size: 0.75em;
+  margin: 0;
+  color: #ccc;
+}
+
+/* 🎨 COLORES por rareza */
+.carta.comun {
+  border-color: #ffffff;
+}
+
+.carta.comun .tipo {
+  border-bottom: 2px solid #ffffff;
+}
+
+.carta.rara .tipo {
+  border-bottom: 2px solid #3c9aff;
+}
+
+.carta.epica .tipo {
+  border-bottom: 2px solid #8b00ff;
+}
+
+.carta.legendaria .tipo {
+  border-bottom: 2px solid #fcd200;
+}
+
+.carta.comun::before,
+.carta.comun::after,
+.carta.comun .corner-bl,
+.carta.comun .corner-br {
+  background-color: #fcfcfc;
+}
+
+.carta.rara {
+  border-color: #3c9aff;
+}
+
+.carta.rara::before,
+.carta.rara::after,
+.carta.rara .corner-bl,
+.carta.rara .corner-br {
+  background-color: #3c9aff;
+}
+
+.carta.epica {
+  border-color: #8b00ff;
+}
+
+.carta.epica::before,
+.carta.epica::after,
+.carta.epica .corner-bl,
+.carta.epica .corner-br {
+  background-color: #8b00ff;
+}
+
+.carta.legendaria {
+  border-color: #fcd200;
+}
+
+.carta.legendaria::before,
+.carta.legendaria::after,
+.carta.legendaria .corner-bl,
+.carta.legendaria .corner-br {
+  background-color: #fcd200;
+}
+
+
+
+
+
+
+.contador {
+  font-size: 0.75em;
+  background-color: #5f0745;
+  padding: 2px 6px;
+  border: 2px solid #ffb3d1;
+  display: inline-block;
+  border-radius: 3px;
+  color: #fff;
+  margin-top: 4px;
+}
+
+
 
 .stats {
   flex: 1;
-  background-color: rgba(10, 10, 10, 0.5);
+  background-color: rgb(10, 10, 10);
   padding: 20px;
   border-radius: 10px;
   color: #fcdfff;
-  border: 2px solid #cc80a5;
-  min-width: 200px;
+  border: 4px solid #faadd2;
+  max-height: 250px;
 }
 
 .stats ul {
@@ -145,31 +273,46 @@ body {
 #abrirSobreBtn {
   font-family: 'Minecraft', sans-serif;
   font-size: 16px;
-  background-color: #000000;
+  background-color: #6e0877;
   color: white;
-  border: 4px solid #000000;
+  border: 1px solid white;
   padding: 10px 20px;
   cursor: pointer;
-  box-shadow: inset -4px -4px 0 #fcb5ea;
-  text-shadow: 1px 1px #ff9eff;
-  transition: transform 0.1s;
+  box-shadow: inset -3px -3px 0 #ffffff;
 }
 
 #abrirSobreBtn:hover {
   transform: scale(1.05);
-  background-color: #e229ca;
 }
 
-
-.carta {
-  border: 2px solid white;
+.listaCartas {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 20px;
   justify-content: center;
-  align-items: center;
-  width: 200px;
 }
 
-.carta img{
-  width: 100px;
+
+#listaTodas,
+#listaComunes,
+#listaRaras,
+#listaEpicas,
+#listaLegendarias {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 1%;
+  gap: 20px;
+}
+
+.tab-button {
+  font-family: 'Minecraft', sans-serif;
+  background-color: #000000;
+  color: rgb(255, 254, 255);
+  padding: 5px;
+  border: 2px solid rgb(255, 255, 255);
+}
+
+.tab-button.active {
+  background-color: purple;
+  color: white;
 }
