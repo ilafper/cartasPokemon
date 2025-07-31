@@ -159,3 +159,17 @@ body {
   transform: scale(1.05);
   background-color: #e229ca;
 }
+
+
+.carta {
+  border: 2px solid white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+}
+
+.carta img{
+  width: 100px;
+}
