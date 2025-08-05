@@ -7,7 +7,15 @@ $(document).ready(function () {
     $('.tab-content').hide();
     $('#' + tabID).show();
   });
+  // const inventario=[
+  //   packsAbiertos=0,
+  //   cartasTotales=0,
+  //   totalComunes=0,
+  //   totalEpicas=0,
+  //   totalRaras=0,
+  //   totalLegendarias=0,
 
+  // ]
   let packsAbiertos = 0;
   let itemsTotales = 0;
 
@@ -50,9 +58,11 @@ $(document).ready(function () {
       $.ajax({
         url: 'https://api-minecraft-phi.vercel.app/api/cartitas',
         method: 'GET',
-        success: function (cartas) {
+        success: function (lista_cartas) {
+          console.log(lista_cartas);
+          
           // Seleccionar 4 cartas aleatorias
-          const cartasSeleccionadas = cartas.sort(() => 0.5 - Math.random()).slice(0, 4);
+          const cartasSeleccionadas = lista_cartas.sort(() => 0.5 - Math.random()).slice(0, 4);
 
           contenedor.empty(); // Limpiar cartas anteriores
 
