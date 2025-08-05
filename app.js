@@ -7,6 +7,9 @@ $(document).ready(function () {
     $('.tab-content').hide();
     $('#' + tabID).show();
   });
+
+
+  
   // const inventario=[
   //   packsAbiertos=0,
   //   cartasTotales=0,
@@ -14,8 +17,8 @@ $(document).ready(function () {
   //   totalEpicas=0,
   //   totalRaras=0,
   //   totalLegendarias=0,
-
   // ]
+
   let packsAbiertos = 0;
   let itemsTotales = 0;
 
