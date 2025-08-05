@@ -70,6 +70,7 @@ body {
   padding: 20px;
   border-radius: 10px;
   border: 4px solid #ffb3d1;
+  min-height: 300px;
 }
 
 .contadores h4 {
@@ -91,12 +92,13 @@ body {
 }
 
 .carta {
+  gap: 10px;
   position: relative;
   background-color: #111;
-  /* Fondo oscuro tipo obsidiana */
   border: 2px solid #8b005d;
   width: 160px;
   padding: 10px;
+  min-height: 220px;
   padding-bottom: 20px;
   text-align: center;
   font-family: 'Minecraft', sans-serif;
@@ -127,7 +129,7 @@ body {
   width: 10px;
   height: 10px;
   background-color: #8b005d;
-  /* Rosa fuerte para destacar */
+
 }
 
 .carta::before {
@@ -151,11 +153,10 @@ body {
 }
 
 .carta img {
-  margin-top: 5px;
   width: 100px;
-  height: 100px;
+  height: 80px;
   object-fit: contain;
-  margin: 0 auto;
+  margin:0 auto;
 }
 
 .carta h5 {
@@ -241,11 +242,14 @@ body {
   font-size: 0.75em;
   background-color: #5f0745;
   padding: 2px 6px;
-  border: 2px solid #ffb3d1;
+  border: 2px solid #5f0745;
   display: inline-block;
   border-radius: 3px;
   color: #fff;
-  margin-top: 4px;
+  position: absolute;
+  bottom: 20px;
+  width: 80%;
+
 }
 
 
@@ -257,7 +261,7 @@ body {
   border-radius: 10px;
   color: #fcdfff;
   border: 4px solid #faadd2;
-  max-height: 250px;
+  max-height: 350px;
 }
 
 .stats ul {
@@ -315,4 +319,13 @@ body {
 .tab-button.active {
   background-color: purple;
   color: white;
+}
+
+.tab-content{
+  background-color: black;
+  border: 3px solid #faadd2;
+  padding: 60px 5px 60px 5px;
+  display: flex;
+  justify-content: center;
+  border-radius: 7px;
 }
