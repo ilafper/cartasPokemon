@@ -84,8 +84,6 @@ $(document).ready(function () {
         url: 'https://api-minecraft-phi.vercel.app/api/cartitas',
         method: 'GET',
         success: function (lista_cartas) {
-          console.log(lista_cartas);
-
           const cartasSeleccionadas = lista_cartas.sort(() => 0.5 - Math.random()).slice(0, 4);
           contenedor.empty();
 
@@ -93,46 +91,47 @@ $(document).ready(function () {
 
           cartasSeleccionadas.forEach(carta => {
             const cartaHTML = `
-              <section class="carta ${carta.tipo}" data-id="${carta._id}" data-nombre="${carta.nombre}">
-                <p class="tipo">${carta.tipo}</p>
-                <span class="corner-bl"></span>
-                <span class="corner-br"></span>
-                <img src="${carta.img}" alt="imagen carta">
-                <h5>${carta.nombre}</h5>
-                <p>${carta.descripcion}</p>
-                <span class="contador">x1</span>
-              </section>
-            `;
+            <section class="carta ${carta.tipo}" data-id="${carta._id}" data-nombre="${carta.nombre}">
+              <p class="tipo">${carta.tipo}</p>
+              <span class="corner-bl"></span>
+              <span class="corner-br"></span>
+              <img src="${carta.img}" alt="imagen carta">
+              <h5>${carta.nombre}</h5>
+              <p>${carta.descripcion}</p>
+              <span class="contador">x1</span>
+            </section>
+          `;
             contenedor.append(cartaHTML);
-            console.log(cartaHTML);
 
-            // Actualizar inventarios visuales
-            actualizarInventario($('#listaTodas'), carta);
+            // Actualizar inventarios visuales y obtener cantidad actualizada
+            const cantidadActualizada = actualizarInventario($('#listaTodas'), carta);
+
+            // Actualizar estadísticas de tipos
             if (carta.tipo === "comun") tipos.comun++;
             else if (carta.tipo === "rara") tipos.rara++;
             else if (carta.tipo === "epica") tipos.epica++;
             else if (carta.tipo === "legendaria") tipos.legendaria++;
 
+            // Actualizar inventario por tipo
             if (carta.tipo === "comun") actualizarInventario($('#listaComunes'), carta);
             else if (carta.tipo === "rara") actualizarInventario($('#listaRaras'), carta);
             else if (carta.tipo === "epica") actualizarInventario($('#listaEpicas'), carta);
             else if (carta.tipo === "legendaria") actualizarInventario($('#listaLegendarias'), carta);
 
-            // Actualizar estadísticas
             itemsTotales++;
 
-            // Construir resumen para guardar
-            let existente = cartasResumen.find(c => c.codigo === carta._id);
-            if (existente) {
-              existente.cantidad++;
+            // Guardamos o actualizamos la carta en el resumen para enviar al backend
+            let cartaEnResumen = cartasResumen.find(c => c.codigo === carta._id);
+            if (cartaEnResumen) {
+              cartaEnResumen.cantidad = cantidadActualizada;
             } else {
-              cartasResumen.push({ codigo: carta._id, cantidad: 1 });
+              cartasResumen.push({ codigo: carta._id, cantidad: cantidadActualizada });
             }
           });
 
           packsAbiertos++;
 
-          // Actualizar en pantalla
+          // Actualizar indicadores en pantalla
           $('#packsCount').text(packsAbiertos);
           $('#itemsCount').text(itemsTotales);
           $('#statCommon').text(tipos.comun);
@@ -140,7 +139,7 @@ $(document).ready(function () {
           $('#statEpic').text(tipos.epica);
           $('#statLegendary').text(tipos.legendaria);
 
-          // Enviar el nuevo inventario al servidor
+          // Construimos el objeto para enviar con las cartas y cantidades
           const inventarioFinal = {
             packsAbiertos: packsAbiertos,
             cartasTotales: itemsTotales,
@@ -148,22 +147,25 @@ $(document).ready(function () {
             totalEpicas: tipos.epica,
             totalRaras: tipos.rara,
             totalLegendarias: tipos.legendaria,
-            cartas: cartasResumen
+            cartas: cartasResumen  // <-- IMPORTANTE enviar las cartas y cantidades
           };
-          console.log(inventarioFinal);
 
+          console.log('Inventario a enviar:', inventarioFinal);
+
+          // Enviamos al backend
           $.ajax({
             url: 'https://api-minecraft-phi.vercel.app/api/inventario',
             method: 'POST',
             contentType: 'application/json',
             data: JSON.stringify(inventarioFinal),
             success: function () {
-              console.log("Inventario actualizado en el servidor", inventarioFinal);
+              console.log("Inventario actualizado en el servidor");
             },
             error: function () {
               alert("Error al guardar el inventario en el servidor");
             }
           });
+
         },
         error: function () {
           alert('Error al cargar las cartas.');
@@ -175,4 +177,5 @@ $(document).ready(function () {
       boton.text("APERTURA");
     }
   });
+
 });
