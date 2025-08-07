@@ -57,7 +57,7 @@ $(document).ready(function () {
       let cantidad = parseInt(contador.text().substring(1));
       contador.text(`x${cantidad + 1}`);
       console.log();
-      
+
     } else {
       const cartaHTML = `
         <section class="carta ${carta.tipo}" data-id="${carta._id}" data-nombre="${carta.nombre}">
@@ -71,11 +71,47 @@ $(document).ready(function () {
         </section>
       `;
       contenedor.append(cartaHTML);
-      
+
       console.log();
-      
+
     }
-    let inventarioCartas= $("#ListaTodas");
+    const cartasInventario = [];
+
+    $('#listaTodas .carta').each(function () {
+      const $carta = $(this);
+      const codigo = $carta.data('id'); // el _id de la carta
+      const nombre = $carta.data('nombre');
+      const tipo = $carta.find('.tipo').text().trim();
+      const descripcion = $carta.find('p').last().text().trim();
+      const img = $carta.find('img').attr('src');
+      const cantidadTexto = $carta.find('.contador').text().trim(); // "x1"
+      const cantidad = parseInt(cantidadTexto.replace('x', '')) || 1;
+
+      cartasInventario.push({
+        codigo,
+        nombre,
+        tipo,
+        descripcion,
+        img,
+        cantidad
+      });
+    });
+    console.log("patata:", JSON.stringify(cartasInventario, null, 2));
+    
+    $.ajax({
+      url: 'https://api-minecraft-phi.vercel.app/api/inventario',
+      method: 'POST',
+      contentType: 'application/json',
+      data: JSON.stringify(cartasInventario.codigo, cartasInventario.cantidad),
+      success: function () {
+        console.log("Inventario actualizado en el servidor");
+      },
+      error: function () {
+        alert("Error al guardar el inventario en el servidor");
+      }
+    });
+
+
   }
 
   $('#abrirSobreBtn').click(function () {
@@ -108,7 +144,7 @@ $(document).ready(function () {
           `;
             contenedor.append(cartaHTML);
 
-            
+
             actualizarInventario($('#listaTodas'), carta);
             // Actualizar estadísticas de tipos
             if (carta.tipo === "comun") tipos.comun++;
@@ -124,14 +160,6 @@ $(document).ready(function () {
 
             itemsTotales++;
 
-            // Guardamos o actualizamos la carta en el resumen para enviar al backend
-            let cartaEnResumen = cartasResumen.find(c => c.codigo === carta._id);
-            if (cartaEnResumen) {
-
-            } else {
-              cartasResumen.push({ codigo: carta._id, cantidad: 1 });
-            }
-            //console.log("sisisCARTASERSO: " + JSON.stringify(cartasResumen));
 
 
           });
@@ -147,24 +175,23 @@ $(document).ready(function () {
           $('#statLegendary').text(tipos.legendaria);
 
           // Construimos el objeto para enviar con las cartas y cantidades
-          const inventarioFinal = {
+          const inventarioDatos1 = {
             packsAbiertos: packsAbiertos,
             cartasTotales: itemsTotales,
             totalComunes: tipos.comun,
             totalEpicas: tipos.epica,
             totalRaras: tipos.rara,
             totalLegendarias: tipos.legendaria,
-            cartas: cartasResumen  // <-- IMPORTANTE enviar las cartas y cantidades
           };
 
-          console.log('Inventario a enviar:', inventarioFinal);
+          console.log('Inventario a enviar:', inventarioDatos1);
 
           // Enviamos al backend
           $.ajax({
             url: 'https://api-minecraft-phi.vercel.app/api/inventario',
             method: 'POST',
             contentType: 'application/json',
-            data: JSON.stringify(inventarioFinal),
+            data: JSON.stringify(inventarioDatos1),
             success: function () {
               console.log("Inventario actualizado en el servidor");
             },
