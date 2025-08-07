@@ -9,16 +9,17 @@ $(document).ready(function () {
   });
 
   let packsAbiertos = 0;
-  let itemsTotales = 0;
+    let itemsTotales = 0;
 
-  let tipos = {
-    comun: 0,
-    rara: 0,
-    epica: 0,
-    legendaria: 0
-  };
+    let tipos = {
+      comun: 0,
+      rara: 0,
+      epica: 0,
+      legendaria: 0
+    };
 
   function cargarInventario() {
+    
     $.ajax({
       url: 'https://api-minecraft-phi.vercel.app/api/inventarioDatos',
       method: 'GET',
@@ -121,7 +122,7 @@ $(document).ready(function () {
             if (existente) {
               existente.cantidad++;
             } else {
-              cartasResumen.push({ id: carta.id, cantidad: 1 });
+              cartasResumen.push({ id: carta.data-id, cantidad: 1 });
             }
           });
 
@@ -153,7 +154,7 @@ $(document).ready(function () {
             contentType: 'application/json',
             data: JSON.stringify(inventarioFinal),
             success: function () {
-              console.log("Inventario actualizado en el servidor");
+              console.log("Inventario actualizado en el servidor","wawawa:", inventarioFinal);
             },
             error: function () {
               alert("Error al guardar el inventario en el servidor");
