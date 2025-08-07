@@ -60,7 +60,7 @@ $(document).ready(function () {
       contador.text(`x${cantidad + 1}`);
     } else {
       const cartaHTML = `
-        <section class="carta ${carta.tipo}" data-id="${carta.id}" data-nombre="${carta.nombre}">
+        <section class="carta ${carta.tipo}" data-id="${carta._id}" data-nombre="${carta.nombre}">
           <p class="tipo">${carta.tipo}</p>
           <span class="corner-bl"></span>
           <span class="corner-br"></span>
