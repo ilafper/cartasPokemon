@@ -94,7 +94,7 @@ $(document).ready(function () {
 
           cartasSeleccionadas.forEach(carta => {
             const cartaHTML = `
-              <section class="carta ${carta.tipo}" data-id="${carta.id}" data-nombre="${carta.nombre}">
+              <section class="carta ${carta.tipo}" data-codigo="${carta._id}" data-nombre="${carta.nombre}">
                 <p class="tipo">${carta.tipo}</p>
                 <span class="corner-bl"></span>
                 <span class="corner-br"></span>
@@ -105,7 +105,8 @@ $(document).ready(function () {
               </section>
             `;
             contenedor.append(cartaHTML);
-
+            console.log(cartaHTML);
+            
             // Actualizar inventarios visuales
             actualizarInventario($('#listaTodas'), carta);
             if (carta.tipo === "comun") actualizarInventario($('#listaComunes'), carta);
@@ -118,11 +119,11 @@ $(document).ready(function () {
             itemsTotales++;
 
            
-            let existente = cartasResumen.find(c => c.id === carta.id);
+            let existente = cartasResumen.find(c => c._id === carta._id);
             if (existente) {
               existente.cantidad++;
             } else {
-              cartasResumen.push({ id: carta.data-id, cantidad: 1 });
+              cartasResumen.push({ codigo: carta._id, cantidad: 1 });
             }
           });
 
