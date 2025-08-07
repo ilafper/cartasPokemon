@@ -44,7 +44,7 @@ $(document).ready(function () {
         $('#statLegendary').text(tipos.legendaria);
       },
       error: function () {
-        alert('Error al cargar datos del inventario.');
+        alert('Error2 al cargar datos del inventarioGET.');
       }
     });
   }
