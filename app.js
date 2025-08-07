@@ -8,7 +8,6 @@ $(document).ready(function () {
     $('#' + tabID).show();
   });
 
-  let cartasCount = [];
   let packsAbiertos = 0;
   let itemsTotales = 0;
 
@@ -21,7 +20,7 @@ $(document).ready(function () {
 
   function cargarInventario() {
     $.ajax({
-      url: 'https://api-minecraft-phi.vercel.app/api/invetario',
+      url: 'https://api-minecraft-phi.vercel.app/api/inventarioDatos',
       method: 'GET',
       success: function (data) {
         if (data.length === 0) return alert('No hay inventario guardado');
@@ -45,7 +44,7 @@ $(document).ready(function () {
         $('#statLegendary').text(tipos.legendaria);
       },
       error: function () {
-        alert('Error al cargar las cartas.');
+        alert('Error al cargar datos del inventario.');
       }
     });
   }
