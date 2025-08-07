@@ -97,12 +97,15 @@ $(document).ready(function () {
       });
     });
     console.log("patata:", JSON.stringify(cartasInventario, null, 2));
-    
+    let cartasArray={
+      codigo:cartasInventario.codigo,
+      cantidad:cartasInventario.cantidad,
+    }
     $.ajax({
       url: 'https://api-minecraft-phi.vercel.app/api/inventario',
       method: 'POST',
       contentType: 'application/json',
-      data: JSON.stringify(cartasInventario.codigo, cartasInventario.cantidad),
+      data: JSON.stringify(cartasArray),
       success: function () {
         console.log("Inventario actualizado en el servidor");
       },
