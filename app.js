@@ -23,14 +23,13 @@ $(document).ready(function () {
       url: 'https://api-minecraft-phi.vercel.app/api/inventarioDatos',
       method: 'GET',
       success: function (data) {
-        if (data.length === 0) return alert('No hay inventario guardado');
+        //if (data.length === 0) return alert('No hay inventario guardado');
 
         const inventario_stok = data[0];
         console.log('Inventario cargado:', inventario_stok);
 
         packsAbiertos = inventario_stok.packsAbiertos;
         itemsTotales = inventario_stok.cartasTotales;
-
         tipos.comun = inventario_stok.totalComunes;
         tipos.rara = inventario_stok.totalRaras;
         tipos.epica = inventario_stok.totalEpicas;
@@ -103,9 +102,8 @@ $(document).ready(function () {
           `;
             contenedor.append(cartaHTML);
 
-            // Actualizar inventarios visuales y obtener cantidad actualizada
-            const cantidadActualizada = actualizarInventario($('#listaTodas'), carta);
-
+            
+            actualizarInventario($('#listaTodas'), carta);
             // Actualizar estadísticas de tipos
             if (carta.tipo === "comun") tipos.comun++;
             else if (carta.tipo === "rara") tipos.rara++;
@@ -123,10 +121,13 @@ $(document).ready(function () {
             // Guardamos o actualizamos la carta en el resumen para enviar al backend
             let cartaEnResumen = cartasResumen.find(c => c.codigo === carta._id);
             if (cartaEnResumen) {
-              cartaEnResumen.cantidad = cantidadActualizada;
+
             } else {
-              cartasResumen.push({ codigo: carta._id, cantidad: cantidadActualizada });
+              cartasResumen.push({ codigo: carta._id, cantidad: 1 });
             }
+            //console.log("sisisCARTASERSO: " + JSON.stringify(cartasResumen));
+
+
           });
 
           packsAbiertos++;

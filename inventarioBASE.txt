@@ -1,0 +1,10 @@
+[
+packsAbiertos: 0,
+cartasTotales: 0,
+totalComunes: 0,
+totalEpicas: 0,
+totalRaras: 0,
+totalLegendarias: 0,
+cartas: []
+]
+          
