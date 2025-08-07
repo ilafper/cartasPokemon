@@ -9,17 +9,16 @@ $(document).ready(function () {
   });
 
   let packsAbiertos = 0;
-    let itemsTotales = 0;
+  let itemsTotales = 0;
 
-    let tipos = {
-      comun: 0,
-      rara: 0,
-      epica: 0,
-      legendaria: 0
-    };
+  let tipos = {
+    comun: 0,
+    rara: 0,
+    epica: 0,
+    legendaria: 0
+  };
 
   function cargarInventario() {
-    
     $.ajax({
       url: 'https://api-minecraft-phi.vercel.app/api/inventarioDatos',
       method: 'GET',
@@ -45,7 +44,7 @@ $(document).ready(function () {
         $('#statLegendary').text(tipos.legendaria);
       },
       error: function () {
-        alert('Error2 al cargar datos del inventarioGET.');
+        alert('Error al cargar datos del inventario.');
       }
     });
   }
@@ -94,7 +93,7 @@ $(document).ready(function () {
 
           cartasSeleccionadas.forEach(carta => {
             const cartaHTML = `
-              <section class="carta ${carta.tipo}" data-codigo="${carta._id}" data-nombre="${carta.nombre}">
+              <section class="carta ${carta.tipo}" data-id="${carta._id}" data-nombre="${carta.nombre}">
                 <p class="tipo">${carta.tipo}</p>
                 <span class="corner-bl"></span>
                 <span class="corner-br"></span>
@@ -106,20 +105,24 @@ $(document).ready(function () {
             `;
             contenedor.append(cartaHTML);
             console.log(cartaHTML);
-            
+
             // Actualizar inventarios visuales
             actualizarInventario($('#listaTodas'), carta);
+            if (carta.tipo === "comun") tipos.comun++;
+            else if (carta.tipo === "rara") tipos.rara++;
+            else if (carta.tipo === "epica") tipos.epica++;
+            else if (carta.tipo === "legendaria") tipos.legendaria++;
+
             if (carta.tipo === "comun") actualizarInventario($('#listaComunes'), carta);
             else if (carta.tipo === "rara") actualizarInventario($('#listaRaras'), carta);
             else if (carta.tipo === "epica") actualizarInventario($('#listaEpicas'), carta);
             else if (carta.tipo === "legendaria") actualizarInventario($('#listaLegendarias'), carta);
 
             // Actualizar estadísticas
-            tipos[carta.tipo] = (tipos[carta.tipo] || 0) + 1;
             itemsTotales++;
 
-           
-            let existente = cartasResumen.find(c => c._id === carta._id);
+            // Construir resumen para guardar
+            let existente = cartasResumen.find(c => c.codigo === carta._id);
             if (existente) {
               existente.cantidad++;
             } else {
@@ -148,14 +151,14 @@ $(document).ready(function () {
             cartas: cartasResumen
           };
           console.log(inventarioFinal);
-          
+
           $.ajax({
             url: 'https://api-minecraft-phi.vercel.app/api/inventario',
             method: 'POST',
             contentType: 'application/json',
             data: JSON.stringify(inventarioFinal),
             success: function () {
-              console.log("Inventario actualizado en el servidor","wawawa:", inventarioFinal);
+              console.log("Inventario actualizado en el servidor", inventarioFinal);
             },
             error: function () {
               alert("Error al guardar el inventario en el servidor");
