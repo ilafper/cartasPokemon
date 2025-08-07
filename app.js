@@ -56,6 +56,8 @@ $(document).ready(function () {
       let contador = cartaExistente.find('.contador');
       let cantidad = parseInt(contador.text().substring(1));
       contador.text(`x${cantidad + 1}`);
+      console.log();
+      
     } else {
       const cartaHTML = `
         <section class="carta ${carta.tipo}" data-id="${carta._id}" data-nombre="${carta.nombre}">
@@ -69,7 +71,11 @@ $(document).ready(function () {
         </section>
       `;
       contenedor.append(cartaHTML);
+      
+      console.log();
+      
     }
+    let inventarioCartas= $("#ListaTodas");
   }
 
   $('#abrirSobreBtn').click(function () {
